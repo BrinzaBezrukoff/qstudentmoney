@@ -53,7 +53,7 @@ void MainWindow::on_pb_ChooseFiles_clicked()
         ui->pb_editInstitute->setEnabled(true);
         ui->pb_editCaffeCinema->setEnabled(true);
     }
-    catch (std::runtime_error& ex) {
+    catch (std::invalid_argument& ex) {
         ui->le_DataPath->setText("");
         ui->pb_Calculate->setEnabled(false);
         ui->pb_editCosts->setEnabled(false);
@@ -82,9 +82,10 @@ void MainWindow::on_pb_Calculate_clicked()
     try {
         uint costs = stud.getCosts(month, workDays, withAge);
         ui->le_Answer->setText(QString::number(costs));
+        ui->le_AnswerName->setText(ui->le_Name->text());
     }
-    catch (std::runtime_error& ex) {
-        QMessageBox::critical(this, "Не удалось посчитать стоимость", ex.what());
+    catch (std::invalid_argument& ex) {
+        QMessageBox::warning(this, "Поиск данных не удался", ex.what());
     }
 }
 

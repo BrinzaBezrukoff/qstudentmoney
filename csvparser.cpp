@@ -15,7 +15,7 @@ void CSVParser::read(string filePath) {
     file.open(filePath);
     _filePath = filePath;
     if (!file.is_open()) {
-        throw std::runtime_error("Can't open file: " + _filePath);
+        throw std::invalid_argument("Файл не найден: " + _filePath);
     }
 
     string line;
@@ -74,7 +74,7 @@ size_t CSVParser::getColumnIndex(const string& columnName) {
             return idx;
         }
     }
-    throw std::runtime_error("Can't find column: " + columnName);
+    throw std::invalid_argument("Такой столбец не найден: " + columnName);
 }
 
 size_t CSVParser::findFirst(const vector<string>& querry) const {
@@ -95,7 +95,7 @@ size_t CSVParser::findFirst(const vector<string>& querry) const {
     for (auto&& el: querry) {
         querryStr += el + ",";
     }
-    throw std::runtime_error("Can't find row: (" + querryStr + ")");
+    throw std::invalid_argument("В файле: " + _filePath  + "\nПо запросу: (" + querryStr + ")");
 }
 
 vector<string>& CSVParser::operator [](const size_t idx) {
