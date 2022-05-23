@@ -8,7 +8,7 @@ string CSVParser::getPath() const {
     return _filePath;
 }
 
-void CSVParser::read(string filePath) {
+void CSVParser::read(const string& filePath) {
     _table.clear();
 
     std::ifstream file;
@@ -43,12 +43,13 @@ void CSVParser::read(string filePath) {
     file.close();
 }
 
-void CSVParser::write(std::string filePath) {
+void CSVParser::write(const std::string& filePath) {
+    string path = filePath;
     if (!filePath.size()) {
-        filePath = _filePath;
+        path = _filePath;
     }
     std::ofstream file;
-    file.open(filePath);
+    file.open(path);
     for (size_t rowId = 0; rowId < _table.size(); rowId++) {
         for (size_t colId = 0; colId < _columnsCount; colId++) {
             file << _table[rowId][colId];

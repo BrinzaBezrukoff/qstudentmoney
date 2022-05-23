@@ -17,8 +17,8 @@ public:
 
     string getPath() const;
 
-    void read(string filePath);
-    void write(string filePath = "");
+    void read(const string& filePath);
+    void write(const string& filePath = "");
 
     vector<string>& getHeader();
     size_t getColumnIndex(const string& columnName);
