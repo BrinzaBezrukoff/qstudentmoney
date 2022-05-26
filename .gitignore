@@ -1,4 +1,6 @@
 *.user
 *.o
 build-*
+.idea
+cmake-build-debug
 
